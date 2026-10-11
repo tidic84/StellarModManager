@@ -81,5 +81,11 @@
   "StatusNotInRepository": "This mod could not be found in the online repository.",
   "StatusUpdated": "{0} updated to {1}.",
   "StatusUpdatedNotDeployed": "{0} updated to {1}. Install it to your game to use it.",
-  "StatusUpdateFailed": "Update failed: {0}"
+  "StatusUpdateFailed": "Update failed: {0}",
+  "CustomRepositoriesLabel": "Custom repositories",
+  "CustomRepositoriesDescription": "Add links to other mods.json files (or GitHub repositories with a mods.json at their root). Their mods and updates appear alongside the official ones.",
+  "RepositoryUrlPlaceholder": "https://github.com/user/repo or a mods.json link",
+  "AddRepository": "Add",
+  "StatusInvalidRepositoryUrl": "Invalid repository link.",
+  "StatusRepositoryFailed": "Could not load {0}: {1}"
 }

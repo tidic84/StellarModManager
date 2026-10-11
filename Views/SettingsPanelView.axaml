@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:StellarModManager.ViewModels"
              xmlns:loc="using:StellarModManager.Services"
+             xmlns:svg="clr-namespace:Avalonia.Svg.Skia;assembly=Svg.Controls.Skia.Avalonia"
              x:Class="StellarModManager.Views.SettingsPanelView"
              x:DataType="vm:MainWindowViewModel">
 
@@ -55,6 +56,44 @@
                               IsChecked="{Binding AutoCheckForModUpdates}"/>
                     <CheckBox Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AutoCheckAppUpdatesLabel]}"
                               IsChecked="{Binding AutoCheckForAppUpdates}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Classes="card">
+                <StackPanel Spacing="8">
+                    <TextBlock Classes="sectionTitle" FontWeight="Normal"
+                               Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CustomRepositoriesLabel]}"/>
+                    <TextBlock Classes="secondary" TextWrapping="Wrap"
+                               Text="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[CustomRepositoriesDescription]}"/>
+
+                    <ItemsControl ItemsSource="{Binding CustomRepositories}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding}"
+                                               TextTrimming="PrefixCharacterEllipsis" ToolTip.Tip="{Binding}"/>
+                                    <Button Grid.Column="1" Classes="subtle icon" Margin="8,0,0,0"
+                                            Command="{Binding $parent[UserControl].((vm:MainWindowViewModel)DataContext).RemoveRepositoryCommand}"
+                                            CommandParameter="{Binding}"
+                                            ToolTip.Tip="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[Remove]}">
+                                        <svg:Svg Path="/Assets/Icons/close.svg" Width="16" Height="16" Stretch="Uniform"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox Text="{Binding NewRepositoryUrl}"
+                                 PlaceholderText="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[RepositoryUrlPlaceholder]}">
+                            <TextBox.KeyBindings>
+                                <KeyBinding Gesture="Enter" Command="{Binding AddRepositoryCommand}"/>
+                            </TextBox.KeyBindings>
+                        </TextBox>
+                        <Button Grid.Column="1" Classes="subtle" Margin="8,0,0,0"
+                                Command="{Binding AddRepositoryCommand}"
+                                Content="{Binding Source={x:Static loc:LocalizationService.Instance}, Path=[AddRepository]}"/>
+                    </Grid>
                 </StackPanel>
             </Border>
 

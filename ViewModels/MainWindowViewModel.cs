@@ -37,6 +37,8 @@ public partial class MainWindowViewModel : ViewModelBase
         autoCheckForModUpdates = appSettings.AutoCheckForModUpdates;
         autoCheckForAppUpdates = appSettings.AutoCheckForAppUpdates;
         sortIndex = appSettings.ModSort;
+        foreach (string url in appSettings.CustomRepositories)
+            CustomRepositories.Add(url);
         isCompactView = appSettings.CompactModList;
 
         themeService.ApplyTheme(themeService.LoadTheme(selectedTheme));

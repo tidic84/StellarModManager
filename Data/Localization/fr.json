@@ -81,5 +81,11 @@
   "StatusNotInRepository": "Ce mod est introuvable dans le dépôt en ligne.",
   "StatusUpdated": "{0} mis à jour vers {1}.",
   "StatusUpdatedNotDeployed": "{0} mis à jour vers {1}. Installez-le dans le jeu pour l'utiliser.",
-  "StatusUpdateFailed": "Échec de la mise à jour : {0}"
+  "StatusUpdateFailed": "Échec de la mise à jour : {0}",
+  "CustomRepositoriesLabel": "Dépôts personnalisés",
+  "CustomRepositoriesDescription": "Ajoutez des liens vers d'autres fichiers mods.json (ou des dépôts GitHub avec un mods.json à la racine). Leurs mods et mises à jour apparaissent avec ceux du dépôt officiel.",
+  "RepositoryUrlPlaceholder": "https://github.com/utilisateur/depot ou un lien mods.json",
+  "AddRepository": "Ajouter",
+  "StatusInvalidRepositoryUrl": "Lien de dépôt invalide.",
+  "StatusRepositoryFailed": "Impossible de charger {0} : {1}"
 }

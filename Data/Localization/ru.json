@@ -81,5 +81,11 @@
   "StatusNotInRepository": "Этот мод не найден в онлайн-репозитории.",
   "StatusUpdated": "{0} обновлён до {1}.",
   "StatusUpdatedNotDeployed": "{0} обновлён до {1}. Установите его в игру, чтобы использовать.",
-  "StatusUpdateFailed": "Ошибка обновления: {0}"
+  "StatusUpdateFailed": "Ошибка обновления: {0}",
+  "CustomRepositoriesLabel": "Свои репозитории",
+  "CustomRepositoriesDescription": "Добавьте ссылки на другие файлы mods.json (или репозитории GitHub с mods.json в корне). Их моды и обновления появятся рядом с официальными.",
+  "RepositoryUrlPlaceholder": "https://github.com/user/repo или ссылка на mods.json",
+  "AddRepository": "Добавить",
+  "StatusInvalidRepositoryUrl": "Неверная ссылка на репозиторий.",
+  "StatusRepositoryFailed": "Не удалось загрузить {0}: {1}"
 }

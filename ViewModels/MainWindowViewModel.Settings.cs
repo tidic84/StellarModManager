@@ -5,6 +5,8 @@ using CommunityToolkit.Mvvm.Input;
 using StellarModManager.Models;
 using StellarModManager.Services;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StellarModManager.ViewModels;
 
@@ -40,6 +42,47 @@ public partial class MainWindowViewModel
 
     private readonly DispatcherTimer updateCheckTimer;
 
+    // mods.json links added by the user, fetched with the official repository
+    public ObservableCollection<string> CustomRepositories { get; } = new();
+
+    [ObservableProperty]
+    private string newRepositoryUrl = "";
+
+    [RelayCommand]
+    private async Task AddRepository()
+    {
+        string? url = ModRepositoryService.NormalizeRepositoryUrl(NewRepositoryUrl);
+
+        if (url == null)
+        {
+            ReportError("StatusInvalidRepositoryUrl");
+            return;
+        }
+
+        NewRepositoryUrl = "";
+
+        if (url == ModRepositoryService.OfficialRepositoryUrl || CustomRepositories.Contains(url))
+            return;
+
+        CustomRepositories.Add(url);
+        PersistSettings();
+
+        if (IsMelonLoaderValid)
+            await RefreshMods();
+    }
+
+    [RelayCommand]
+    private async Task RemoveRepository(string url)
+    {
+        if (!CustomRepositories.Remove(url))
+            return;
+
+        PersistSettings();
+
+        if (IsMelonLoaderValid)
+            await RefreshMods();
+    }
+
     // Settings are saved as soon as they change
     private void PersistSettings()
     {
@@ -51,7 +94,8 @@ public partial class MainWindowViewModel
             AutoCheckForModUpdates = AutoCheckForModUpdates,
             AutoCheckForAppUpdates = AutoCheckForAppUpdates,
             ModSort = SortIndex,
-            CompactModList = IsCompactView
+            CompactModList = IsCompactView,
+            CustomRepositories = CustomRepositories.ToList()
         });
     }
 

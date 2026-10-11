@@ -64,23 +64,45 @@ public partial class MainWindowViewModel
     [RelayCommand]
     private async Task RefreshMods()
     {
-        List<OnlineModInfo> mods;
+        var sources = new[] { ModRepositoryService.OfficialRepositoryUrl }.Concat(CustomRepositories).ToList();
 
-        try
+        // fetch every repository at once, a failing one doesnt block the others
+        var results = await Task.WhenAll(sources.Select(async url =>
         {
-            mods = await repositoryService.GetModsAsync(
-                "https://voxar.dev/mods.json"
-            );
-        }
-        // catch failed refresh
-        catch (Exception ex)
+            try
+            {
+                return (url, mods: await repositoryService.GetModsAsync(url), error: (string?)null);
+            }
+            catch (Exception ex)
+            {
+                return (url, mods: new List<OnlineModInfo>(), error: (string?)ex.Message);
+            }
+        }));
+
+        var failed = results.Where(r => r.error != null).ToList();
+
+        if (failed.Count == results.Length)
         {
-            ReportError("StatusRefreshFailed", ex.Message);
+            ReportError("StatusRefreshFailed", failed[0].error!);
             return;
         }
-        // remove old mods when finding mods
-        foreach (var gone in OnlineMods.Where(o => mods.All(m => m.Id != o.Id)).ToList())
-            OnlineMods.Remove(gone);
+
+        foreach (var (url, _, error) in failed)
+            ReportError("StatusRepositoryFailed", url, error!);
+
+        // official repository first, so a custom one cant replace its mods
+        List<OnlineModInfo> mods = results
+            .SelectMany(r => r.mods)
+            .GroupBy(m => m.Id)
+            .Select(g => g.First())
+            .ToList();
+
+        // remove old mods when finding mods, keep them if a repository couldnt be reached
+        if (failed.Count == 0)
+        {
+            foreach (var gone in OnlineMods.Where(o => mods.All(m => m.Id != o.Id)).ToList())
+                OnlineMods.Remove(gone);
+        }
 
         foreach (var mod in mods)
         {

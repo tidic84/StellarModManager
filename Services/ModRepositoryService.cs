@@ -43,7 +43,26 @@ public class ModRepositoryService
     }
 
     // request no cache (even tho im almost certain this doesnt work, we still try...)
-    private static string NoCache(string url) => $"{url}?t={DateTime.UtcNow.Ticks}";
+    private static string NoCache(string url) => $"{url}{(url.Contains('?') ? '&' : '?')}t={DateTime.UtcNow.Ticks}";
+
+    public const string OfficialRepositoryUrl = "https://voxar.dev/mods.json";
+
+    private static readonly Regex GitHubRepoUrl = new(@"^https?://github\.com/([A-Za-z0-9][A-Za-z0-9._-]*)/([A-Za-z0-9][A-Za-z0-9._-]*?)(\.git)?/?$", RegexOptions.IgnoreCase);
+
+    // Accepts a direct mods.json link, or a GitHub repo link with mods.json at its root
+    public static string? NormalizeRepositoryUrl(string input)
+    {
+        string url = input.Trim();
+
+        if (!Uri.TryCreate(url, UriKind.Absolute, out Uri? uri) || (uri.Scheme != Uri.UriSchemeHttps && uri.Scheme != Uri.UriSchemeHttp))
+            return null;
+
+        Match github = GitHubRepoUrl.Match(url);
+        if (github.Success)
+            return $"https://raw.githubusercontent.com/{github.Groups[1].Value}/{github.Groups[2].Value}/main/mods.json";
+
+        return uri.AbsoluteUri;
+    }
 
     public async Task<List<OnlineModInfo>> GetModsAsync(string url)
     {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace StellarModManager.Models;
@@ -11,4 +12,6 @@ public class AppSettings
     public string Theme { get; set; } = "Midnight Slate";
     public int ModSort { get; set; }
     public bool CompactModList { get; set; }
+    // Extra mods.json sources listed alongside the official repository
+    public List<string> CustomRepositories { get; set; } = new();
 }
