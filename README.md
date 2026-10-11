@@ -1,45 +1,37 @@
-# Stellar Mod Manager
+# TF Stellar Mod Manager
 
-A mod manager for the game **StellarDrive**.
+> ⚠️ **Branche privée `tf` : version custom réservée à mes potes et moi.**
+> Ce n'est pas la version officielle de Stellar Mod Manager. Pour la version officielle, voir [jollyname/StellarModManager](https://github.com/jollyname/StellarModManager).
 
-Stellar Mod Manager makes it easier to install, update, and manage mods for StellarDrive. It can automatically install MelonLoader if needed and provides a simple interface for managing your mods.
+Fork de [Stellar Mod Manager](https://github.com/jollyname/StellarModManager), le gestionnaire de mods pour **StellarDrive**.
 
-## Features
+## Différences avec la version officielle
 
-- Automatic MelonLoader installation
-- Browse available mods
-- Install and manage installed mods
-- Simple setup process
-- Built for StellarDrive
+- **Dépôts personnalisés** : *Paramètres → Dépôts personnalisés* permet d'ajouter d'autres listes de mods (`mods.json`).
+- **Notre dépôt de mods préconfiguré** : [tidic84/StellarModRepository](https://github.com/tidic84/StellarModRepository) (nos mods et ceux de Romalaure) s'affiche avec les mods officiels, sans rien configurer.
+- **Logiciel séparé** : s'appelle *TFStellarModManager*, s'installe à côté de la version officielle sans la remplacer, avec ses propres réglages.
+- **Mises à jour** : l'app vérifie les [releases de ce fork](https://github.com/tidic84/StellarModManager/releases), pas celles de l'officiel.
+- Thème **Midnight Slate** par défaut.
 
-## Getting Started
+## Installation
 
-1. Download the latest release.
-2. Launch Stellar Mod Manager.
-3. Select your StellarDrive installation folder when prompted.
-4. If MelonLoader is not installed, the manager can install it automatically.
-5. Use Browse, Library and Updates in the sidebar to manage your mods.
+1. Télécharger `TFStellarModManager_<version>_Setup.exe` dans la [dernière release](https://github.com/tidic84/StellarModManager/releases/latest).
+2. Lancer l'installateur. Windows SmartScreen peut avertir car l'exe n'est pas signé : *Informations complémentaires → Exécuter quand même*.
+3. Au premier lancement, choisir le dossier de StellarDrive. L'app peut installer MelonLoader automatiquement.
 
-## Submitting Your Mods
+## Publier une nouvelle version (pour moi)
 
-Want to make your mod available to other StellarDrive players? You can submit your mod for inclusion in Stellar Mod Manager.
+1. Augmenter `<Version>` dans `StellarModManager.csproj`.
+2. Build :
+   ```
+   dotnet publish StellarModManager.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o App
+   ```
+   puis copier `License.txt`, `PostInfo.txt` et `Assets/icon.ico` dans `App/`, et supprimer `App/*.pdb`.
+3. Installateur : `ISCC.exe /DMyAppVersion=<version> StellarModManager.iss` (Inno Setup 6) → `Output/`.
+4. Release GitHub avec le tag `v<version>` (marquée *Latest*, pas pré-release) contenant le `..._Setup.exe`.
 
-Visit the [Mod Submission page](https://voxar.dev/submit/) to submit your mod for review.
+Les apps déjà installées proposent la mise à jour au lancement suivant.
 
-## Download
+## Licence
 
-You can find releases in the GitHub Releases section.
-
-## Windows SmartScreen Warning
-
-Windows may display a warning because the application is not code-signed.
-
-This project is open source, and the complete source code is available in this repository. You can inspect the code or build the application yourself if you prefer.
-
-## Reporting Issues
-
-If you find a bug or have a suggestion, open an issue on GitHub.
-
-## License
-
-This project is licensed under the MIT License.
+MIT, comme le projet d'origine.

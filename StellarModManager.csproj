@@ -4,10 +4,12 @@
 		<OutputType>Exe</OutputType>
 		<OutputType Condition="'$(Configuration)' == 'Release'">WinExe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>TFStellarModManager</AssemblyName>
+		<RootNamespace>StellarModManager</RootNamespace>
 		<Nullable>enable</Nullable>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-		<Version>2.1.0</Version>
+		<Version>2.2.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

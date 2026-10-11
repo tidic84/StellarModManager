@@ -25,12 +25,12 @@ public class ModRepositoryService
 
     private static readonly string[] DefaultThumbnailAssets =
     {
-        "avares://StellarModManager/Assets/Thumbnails/smileyAngry.png",
-        "avares://StellarModManager/Assets/Thumbnails/smileyCry.png",
-        "avares://StellarModManager/Assets/Thumbnails/smileyFrown.png",
-        "avares://StellarModManager/Assets/Thumbnails/smileyGrumpy.png",
-        "avares://StellarModManager/Assets/Thumbnails/smileyTounge.png",
-        "avares://StellarModManager/Assets/Thumbnails/smileyWhat.png"
+        "avares://TFStellarModManager/Assets/Thumbnails/smileyAngry.png",
+        "avares://TFStellarModManager/Assets/Thumbnails/smileyCry.png",
+        "avares://TFStellarModManager/Assets/Thumbnails/smileyFrown.png",
+        "avares://TFStellarModManager/Assets/Thumbnails/smileyGrumpy.png",
+        "avares://TFStellarModManager/Assets/Thumbnails/smileyTounge.png",
+        "avares://TFStellarModManager/Assets/Thumbnails/smileyWhat.png"
     };
 
     private static Bitmap LoadDefaultThumbnail(OnlineModInfo mod)

@@ -10,7 +10,7 @@
 
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://StellarModManager/Styles/AppStyles.axaml"/>
+        <StyleInclude Source="avares://TFStellarModManager/Styles/AppStyles.axaml"/>
     </Application.Styles>
 
     <Application.Resources>

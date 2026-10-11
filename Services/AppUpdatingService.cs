@@ -11,14 +11,18 @@ namespace StellarModManager.Services;
 
 public class AppUpdatingService
 {
-    private const string RepoApi = "https://api.github.com/repos/jollyname/StellarModManager/releases/latest";
+    private const string RepoApi = "https://api.github.com/repos/tidic84/StellarModManager/releases/latest";
 
     public async Task<UpdateInfo?> CheckAsync()
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.UserAgent.ParseAdd("StellarModManager");
 
-        var release = await client.GetFromJsonAsync<GitHubRelease>(RepoApi);
+        // no release published yet (404) or offline: just skip the check
+        using var response = await client.GetAsync(RepoApi);
+        if (!response.IsSuccessStatusCode) return null;
+
+        var release = await response.Content.ReadFromJsonAsync<GitHubRelease>();
         if (release is null) return null;
 
         var latest = Version.Parse(release.tag_name.TrimStart('v'));

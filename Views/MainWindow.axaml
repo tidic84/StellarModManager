@@ -10,7 +10,7 @@
         x:Class="StellarModManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/icon.ico"
-        Title="Stellar Mod Manager"
+        Title="TF Stellar Mod Manager"
         Width="1280" Height="820"
         MinWidth="960" MinHeight="600"
         Background="{DynamicResource Theme.BackgroundBrush}">

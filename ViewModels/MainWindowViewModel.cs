@@ -31,7 +31,7 @@ public partial class MainWindowViewModel : ViewModelBase
         LoadAvailableLanguages();
 
         var appSettings = settingsService.LoadAppSettings();
-        selectedTheme = appSettings.Theme;
+        selectedTheme = AvailableThemes.Contains(appSettings.Theme) ? appSettings.Theme : ThemeService.DefaultThemeName;
         selectedLanguage = appSettings.Language;
         confirmBeforeRemove = appSettings.ConfirmBeforeRemove;
         autoCheckForModUpdates = appSettings.AutoCheckForModUpdates;

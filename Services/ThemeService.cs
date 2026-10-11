@@ -14,6 +14,8 @@ public class ThemeService
     private readonly string themesFolder = Path.Combine(AppContext.BaseDirectory, "Data", "Themes");
     private Dictionary<string, ThemeDefinition>? _themeCache;
 
+    public const string DefaultThemeName = "Midnight Slate";
+
     public void ApplyTheme(ThemeDefinition theme)
     {
         var resources = Application.Current!.Resources;
@@ -80,6 +82,10 @@ public class ThemeService
     public ThemeDefinition LoadTheme(string themeName)
     {
         var themes = LoadAllThemes();
-        return themes.TryGetValue(themeName, out var theme) ? theme : new ThemeDefinition();
+        if (themes.TryGetValue(themeName, out var theme))
+            return theme;
+
+        // unknown theme name falls back to the default one
+        return themes.TryGetValue(DefaultThemeName, out var fallback) ? fallback : new ThemeDefinition();
     }
 }

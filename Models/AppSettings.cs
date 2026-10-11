@@ -9,9 +9,10 @@ public class AppSettings
     public bool ConfirmBeforeRemove { get; set; } = true;
     public bool AutoCheckForModUpdates { get; set; } = true;
     public bool AutoCheckForAppUpdates { get; set; } = true;
-    public string Theme { get; set; } = "Midnight Slate";
+    public string Theme { get; set; } = Services.ThemeService.DefaultThemeName;
     public int ModSort { get; set; }
     public bool CompactModList { get; set; }
     // Extra mods.json sources listed alongside the official repository
-    public List<string> CustomRepositories { get; set; } = new();
+    // TF edition: the friends' repository is there on first launch, it can still be removed
+    public List<string> CustomRepositories { get; set; } = new() { "https://raw.githubusercontent.com/tidic84/StellarModRepository/main/mods.json" };
 }

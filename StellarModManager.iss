@@ -2,18 +2,18 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 ; Non-commercial use only
 
-#define MyAppName "StellarModManager"
+#define MyAppName "TFStellarModManager"
 #ifndef MyAppVersion
   #define MyAppVersion "1.3.1"
 #endif
 #define MyAppPublisher "Krunk"
-#define MyAppURL "https://github.com/Krunk-theduck/StellarModManager"
-#define MyAppExeName "StellarModManager.exe"
+#define MyAppURL "https://github.com/tidic84/StellarModManager"
+#define MyAppExeName "TFStellarModManager.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{1E759F05-83B5-4D66-8ADE-FC3386A001A5}
+AppId={{3B8A3030-86B5-46F5-878B-FE53292657A4}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -40,7 +40,7 @@ InfoAfterFile=App\PostInfo.txt
 ; Remove the following line to run in administrative install mode (install for all users).
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=StellarModManager_{#MyAppVersion}_Setup
+OutputBaseFilename=TFStellarModManager_{#MyAppVersion}_Setup
 SetupIconFile=App\icon.ico
 SolidCompression=yes
 WizardStyle=modern dynamic

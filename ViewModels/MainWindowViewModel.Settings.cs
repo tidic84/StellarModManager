@@ -22,7 +22,7 @@ public partial class MainWindowViewModel
     public ObservableCollection<string> AvailableLanguages { get; } = new();
 
     [ObservableProperty]
-    private string selectedTheme = "Purple";
+    private string selectedTheme = ThemeService.DefaultThemeName;
 
     [ObservableProperty]
     private string selectedLanguage = "en";
